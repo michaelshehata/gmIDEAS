@@ -1,3 +1,19 @@
-.venv
-.env
+# environment
+.venv/
+
+# folders
 data
+
+
+# agents
+.codex
+.agents
+
+# python
+__pycache__/
+.python-version
+
+# misc
+.env
+.toml
+.lock
