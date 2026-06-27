@@ -5,6 +5,16 @@
 </p>
 
 
+<p align="center">
+  <img src="assets/gmIdeas.png" alt="gmIdeas — Turn the web into your market research team." width="800" />
+</p>
+
+<p align="center">
+  <strong>An open source project</strong>
+  <br />
+  <em>Created by: <a href="https://github.com/michaelshehata">Michael Shehata</a>.</em>
+</p>
+
 
 ## Overview
 
