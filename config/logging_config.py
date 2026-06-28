@@ -17,7 +17,7 @@ def setup_logging(level=logging.INFO):
         show_path=False,
     )
     console_handler.setFormatter(
-        logging.Formatter("%(message)s")
+        logging.Formatter("%(name)s | %(message)s")
     )
 
     file_handler = RotatingFileHandler(
@@ -39,5 +39,9 @@ def setup_logging(level=logging.INFO):
     root_logger.setLevel(level)
     root_logger.addHandler(console_handler)
     root_logger.addHandler(file_handler)
+
+    
+    logging.getLogger("httpx").setLevel(logging.WARNING)
+    logging.getLogger("httpcore").setLevel(logging.WARNING)
 
 
