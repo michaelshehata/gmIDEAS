@@ -9,4 +9,5 @@ dependencies = [
     "httpx>=0.28.1",
     "pgvector>=0.4.2",
     "playwright>=1.60.0",
+    "rich>=15.0.0",
 ]
