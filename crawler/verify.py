@@ -1,26 +1,54 @@
-import httpx
 import logging
-from config.logging_config import setup_logging
+import httpx
 
-# Logging system
-setup_logging()
 logger = logging.getLogger(__name__)
 
-# HTTP Request 
-response = httpx.get("https://www.reddit.com/r/learnprogramming/")
 
-# Status code check
-match response.status_code:
-    case 200:
-        _
-    case 404:
-        _
-    case 403:
-        _
-    case 429:
-        _
+def verify(url: str):
 
+    logger.info("Starting verification for %s", url)
 
-# Check for specific content in the response
-if "verify" in response.text.lower():
-    print("Switch to playwright")
+    try:
+        response = httpx.get(url, timeout=30)
+
+    except httpx.RequestError:
+        logger.exception("Failed to connect to %s", url)
+        return
+
+    logger.info(
+        "Received HTTP %d from %s",
+        response.status_code,
+        url,
+    )
+
+    match response.status_code:
+
+        case 200:
+            logger.info("Request completed successfully.")
+
+        case 403:
+            logger.warning("Access forbidden.")
+
+        case 404:
+            logger.warning("Resource not found.")
+
+        case 429:
+            logger.warning("Rate limit encountered.")
+
+        case _:
+            logger.warning(
+                "Unexpected status code %d",
+                response.status_code,
+            )
+
+    if "verify" in response.text.lower():
+        logger.warning(
+            "Verification challenge detected. Playwright may be required."
+        )
+
+    else:
+        logger.info(
+            "No verification challenge detected."
+        )
+
+    logger.info("Verification complete.")
